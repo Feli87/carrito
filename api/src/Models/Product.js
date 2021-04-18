@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    artist: {
+    brand: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -19,33 +19,33 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL,
       allowNull: false,
     },
-    reproductions: {
+    views: {
       type: DataTypes.INTEGER,
       allowNull: true,
       defaultValue: 0,
     },
-    bpm: {
-      type: DataTypes.INTEGER,
+    ofert: {
+      type: DataTypes.DECIMAL,
       allowNull: true,
       defaultValue: 0,
     },
-    scale: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: "Em",
+    overcome: {
+      type: DataTypes.ENUM("can", "glass-bottle", "plastic-bottle", "barrel"),
+      defaultValue:"can"
     },
-    date: {
-      type: DataTypes.STRING,
+    amount:{
+      type: DataTypes.DECIMAL,
       allowNull: true,
-      defaultValue: "01/01/1987",
+      defaultValue: 0,
+    },
+    measure: {
+      type: DataTypes.ENUM("ml", "l", "cm3"),
+      defaultValue:"ml"
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    audio: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      defaultValue:"default.jpg"
     },
   });
 };

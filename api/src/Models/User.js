@@ -2,11 +2,6 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define("user", {
-    id:{
-      type: DataTypes.STRING(255),
-      primaryKey: true,
-      allowNull: true
-    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -15,24 +10,12 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       defaultValue: "default.jpg",
     },
-    subscription: {
-      type: DataTypes.ENUM("rat", "monkey", "cougar", "lion"),
-      defaultValue: "rat"
-    },
     online: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
-    freeBeats: {
-      type: DataTypes.INTEGER,
-      defaultValue: 5
-    },
     password: {
       type: DataTypes.STRING,
-    },
-    refresToken: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
     password_virtual:{
       type: DataTypes.VIRTUAL,

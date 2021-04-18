@@ -1,4 +1,5 @@
 require('dotenv').config();
+const bcrypt = require('bcrypt');
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
@@ -31,11 +32,17 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User } = sequelize.models;
+const { User,Product,OrderLine,Order } = sequelize.models;
 
 // Aca vendrian las relaciones:
 
-
+//BEFORE CREATE QUERY
+User.beforeCreate(async (user) => {
+  if (user.password_virtual) {
+    const encryptPassword = await bcrypt.hash(user.password_virtual, 10);
+    user.password = encryptPassword;
+  }
+});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { User } = require('./db.js');

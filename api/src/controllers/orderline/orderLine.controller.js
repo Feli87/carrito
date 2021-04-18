@@ -6,16 +6,13 @@ module.exports = {
     try {
         return await OrderLine.findAll().then(async (orders)=>{
           var aux = false
-          console.log("AUX", aux)
+
           for (let i = 0; i < orders.length; i++) {
 
-            if(orders[i].dataValues.orderId === newOrder.orderId && orders[i].dataValues.productId === newOrder.productId){
-              // console.log("ID Product ES IGUAL", orders[i].dataValues.productId)
-              // console.log("ID PRODUCT ORDER DEL FRONT ", newOrder.productId)
-              // console.log("ID ORDER ES IGUAL", orders[i].dataValues.orderId)
-              // console.log("ID ORDER ORDER DEL FRONT ", newOrder.orderId)
-              aux = true
-             }            
+            if(orders[i].dataValues.orderId === newOrder.orderId
+               && orders[i].dataValues.productId === newOrder.productId){
+                  aux = true
+            }            
           }
           console.log("AUX 2", aux)
           if(!aux){
@@ -23,14 +20,8 @@ module.exports = {
           }
         })
     } catch (error) {
-      console.log(error)
+      return error
     } 
-
-    //   return await OrderLine.findOrCreate(order,{
-  //     where: {
-  //       productId: order.product.id
-  //   }
-  // }).then((order) => order);
   },
   getOrderLines: async () => {
     return await OrderLine.findAll().then((orders) => orders);

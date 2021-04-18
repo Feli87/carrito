@@ -1,4 +1,4 @@
-const { User, Messages } = require("../../db");
+const {User} = require("../../db");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
@@ -8,16 +8,15 @@ module.exports = {
       },
 
      findUserById(id) {
-        return User.findOne({
-          where: {
-            id: id
-          },
-          include: [
-            {
-              model: Messages,
-              as: "messages",
-            },
-          ],
+        return User.findByPk(id)
+        .then((user)=>{
+          if(user){
+            return user
+          }else{
+            return "User Dont Exist"
+          }
+        }).catch((error)=>{
+          return error
         });
       },
      findByEmail(email){

@@ -3,21 +3,20 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
 
-  addUser: async (user) => {
-
-    const Exist = await User.findOne({
-        where:{
-          email:user.email
-        }
-    });
-
-    if(Exist){
-      return new Promise((res,rej)=>{
-            res('user exist')
-      })
-    }
-
-    return await User.create(user).then(user => user); 
+  addUser: async (user) => {    
+    return await User.findOrCreate({
+      where:{
+        email:user.email
+      }, 
+      defaults:{
+        name: user.name,
+        email: user.email,
+        password_virtual: user.password_virtual
+      }
+    }).then(user => user)
+    .catch((error)=>{
+      return error
+    }); 
      
   },
 
